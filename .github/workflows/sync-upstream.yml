@@ -61,8 +61,9 @@ jobs:
           echo "Found PRs:"
           echo "$OPEN_PRS" | jq -r '.[] | "PR #\(.number): \(.title) by @\(.author.login)"'
 
-          # Filter to non-draft PRs only (include ALL PRs - both from forks and ionic-team)
-          ALL_PRS=$(echo "$OPEN_PRS" | jq '[.[] | select(.isDraft == false)]')
+          # Filter to non-draft PRs and exclude our own PRs (riderx is the maintainer)
+          # This prevents syncing PRs we created ourselves on the upstream repo
+          ALL_PRS=$(echo "$OPEN_PRS" | jq '[.[] | select(.isDraft == false and .author.login != "riderx")]')
 
           echo ""
           echo "All open PRs (non-draft):"
