@@ -175,10 +175,11 @@ async function generatePodFile(config: Config, plugins: Plugin[]): Promise<strin
 
   const pods = plugins
     .filter((p) => getPluginType(p, platform) === PluginType.Core && p.ios)
-    .map((p) =>
-      `  pod '${p.ios.name}', :path => '${convertToUnixPath(
-        relative(config.ios.nativeProjectDirAbs, p.rootPath),
-      )}'\n`
+    .map(
+      (p) =>
+        `  pod '${p.ios.name}', :path => '${convertToUnixPath(
+          relative(config.ios.nativeProjectDirAbs, p.rootPath),
+        )}'\n`,
     );
   const cordovaPlugins = plugins.filter((p) => getPluginType(p, platform) === PluginType.Cordova);
   cordovaPlugins.map(async (p) => {
