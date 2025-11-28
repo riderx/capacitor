@@ -605,7 +605,7 @@ const initBridge = (w: any): void => {
 
         // XHR patch
         interface PatchedXMLHttpRequestConstructor extends XMLHttpRequest {
-          new(): XMLHttpRequest;
+          new (): XMLHttpRequest;
         }
 
         window.XMLHttpRequest = function () {
